@@ -299,6 +299,30 @@ function typeIntroText(text, callback) {
   typing();
 }
 
+const texts = document.querySelectorAll('.text');
+
+function typeWriter(element, speed = 35) {
+  const text = element.getAttribute("data-text");
+  if (!text) return;
+
+  element.innerHTML = "";
+  element.classList.add("typing");
+
+  let i = 0;
+
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    } else {
+      element.classList.remove("typing");
+    }
+  }
+
+  typing();
+}
+
 function revealOnScroll() {
   const triggerBottom = window.innerHeight * 0.85;
 
@@ -315,7 +339,10 @@ function revealOnScroll() {
 }
 
 window.addEventListener("scroll", revealOnScroll);
-window.addEventListener("load", revealOnScroll);
+window.addEventListener("load", () => {
+  setTimeout(revealOnScroll, 300);
+});
+
 </script>
 
 </body>
