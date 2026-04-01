@@ -214,6 +214,8 @@ img {
     <div class="text" data-text="I will always be there for you. With love, yours and yours only..Ranjeet"></div>
     <img src="photo10.jpg">
 
+</div>
+</div>
 
 <!-- Popup -->
 <div id="popup">btw I love you MOREEEE</div>
@@ -258,24 +260,6 @@ window.addEventListener("scroll", () => {
     document.getElementById("popup").style.display = "block";
   }
 });
-const texts = document.querySelectorAll('.text');
-
-function typeWriter(element, speed = 35) {
-  const text = element.dataset.text;
-  element.innerHTML = "";
-  element.classList.add("typing");
-
-  let i = 0;
-
-  function typing() {
-    if (i < text.length) {
-      element.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typing, speed);
-    } else {
-      element.classList.remove("typing");
-    }
-  }
 
   typing();
 }
