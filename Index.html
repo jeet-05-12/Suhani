@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To Suhani ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Dancing Script', cursive;
+  background: linear-gradient(to bottom, #0f0f1a, #1a1a2e);
+  color: #ffd1dc;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Glow */
+.glow {
+  color: #ff4d6d;
+  text-shadow: 0 0 10px #ff4d6d, 0 0 25px #ff85a1;
+}
+
+/* Lock Screen */
+#lockScreen, #introScreen {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #0f0f1a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#introScreen { display: none; }
+
+input, button {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  margin-top: 10px;
+}
+
+button {
+  background: #ff4d6d;
+  color: white;
+  cursor: pointer;
+}
+
+/* Main */
+#mainContent { display: none; }
+
+.container {
+  max-width: 700px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Text */
+.text {
+  font-size: 1.6em;
+  margin: 40px 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: 1s;
+}
+
+.typing {
+  border-right: 2px solid #ffd1dc;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* Images */
+img {
+  width: 100%;
+  border-radius: 20px;
+  margin: 20px 0;
+}
+
+/* Hearts */
+.hearts {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -20px;
+  color: rgba(255, 77, 109, 0.6);
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 0.7; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+/* Popup */
+#popup {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1a1a2e;
+  padding: 20px;
+  border-radius: 20px;
+  display: none;
+  box-shadow: 0 0 20px #ff4d6d;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Lock -->
+<div id="lockScreen">
+  <h2>Enter Password 💖</h2>
+  <input type="password" id="password">
+  <button onclick="unlock()">Unlock</button>
+</div>
+
+<!-- Intro -->
+<div id="introScreen">
+  <h1 id="introText" class="glow"></h1>
+</div>
+
+<div class="hearts"></div>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3">
+</audio>
+
+<!-- Main -->
+<div id="mainContent">
+  <div class="container">
+
+<h1>Happy 2nd Anniversary, <span class="glow">Suhani</span> ❤️</h1>
+
+<div class="text" data-text="Suhani... you changed my life in ways I never imagined. You taught me to love.."></div>
+<img src="photo1.jpg">
+
+<div class="text" data-text="Every hug, every moment with you feels soft, warm, and real."></div>
+<img src="photo2.jpg">
+
+<div class="text" data-text="Your arms are my favorite place to just sink in..."></div>
+<img src="photo3.jpg">
+
+<div class="text" data-text="I don't know how fast these 2 years went.. now it feels like I have known you since forever. With you, everything feels right."></div>
+<img src="photo4.jpg">
+
+<div class="text" data-text="I promise to love you in every phase, every mood, every day."></div>
+<img src="photo5.jpg">
+
+<div class="text" data-text="You are my peace, my chaos, my everything."></div>
+<img src="photo6.jpg">
+
+<div class="text" data-text="You have made it such that I can't imagine my day ending without talking to you.. or seeing you smile.. or enjoying your little dance breaks.."></div>
+<img src="photo7.jpg">
+
+<div class="text" data-text="You make our journey towards becoming CA's lighter.."></div>
+<img src="photo8.jpg">
+
+<div class="text" data-text="To many more years laughing, loving, dreaming, gossiping, cuddling, and a little bit of drama, with you.."></div>
+<img src="photo9.jpg">
+
+<div class="text" data-text="I will always be there for you. With love, yours and yours only..Ranjeet"></div>
+<img src="photo10.jpg">
+
+  </div>
+</div>
+
+<div id="popup">btw I love you MOREEEE 💖</div>
+
+<script>
+// Unlock
+function unlock() {
+  const pass = document.getElementById("password").value;
+  if(pass === "pudding") {
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("introScreen").style.display = "flex";
+    typeIntro();
+  } else {
+    alert("Wrong password 😢");
+  }
+}
+
+// Intro typing
+function typeIntro() {
+  const text = "Suhani ❤️";
+  const el = document.getElementById("introText");
+  let i = 0;
+
+  function type() {
+    if(i < text.length) {
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, 120);
+    } else {
+      setTimeout(() => {
+        document.getElementById("introScreen").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+        document.getElementById("bgMusic").play();
+        revealOnScroll();
+      }, 1000);
+    }
+  }
+  type();
+}
+
+// Typing effect
+const texts = document.querySelectorAll(".text");
+
+function typeWriter(el) {
+  const text = el.getAttribute("data-text");
+  el.innerHTML = "";
+  el.classList.add("typing");
+
+  let i = 0;
+  function type() {
+    if(i < text.length) {
+      el.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, 30);
+    } else {
+      el.classList.remove("typing");
+    }
+  }
+  type();
+}
+
+// Scroll reveal
+function revealOnScroll() {
+  texts.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if(top < window.innerHeight * 0.85 && !el.classList.contains("done")) {
+      el.classList.add("done");
+      el.style.opacity = 1;
+      el.style.transform = "translateY(0)";
+      typeWriter(el);
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+
+// Hearts
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random()*100 + "vw";
+  heart.style.fontSize = (10 + Math.random()*20) + "px";
+  heart.style.animationDuration = (6 + Math.random()*4) + "s";
+  document.querySelector(".hearts").appendChild(heart);
+  setTimeout(()=>heart.remove(), 8000);
+}, 400);
+
+// Popup
+window.addEventListener("scroll", () => {
+  if(window.innerHeight + window.scrollY >= document.body.offsetHeight - 10) {
+    document.getElementById("popup").style.display = "block";
+  }
+});
+</script>
+
+</body>
+  </html>
