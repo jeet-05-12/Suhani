@@ -223,21 +223,7 @@ img {
 <script>
 // Unlock
 function unlock() {
-  const pass = document.getElementById("password").value;
-
-  if(pass === "pudding") {
-    document.getElementById("lockScreen").style.display = "none";
-    document.getElementById("introScreen").style.display = "flex";
-
-    typeIntroText("Suhani ❤️", () => {
-      document.getElementById("introScreen").style.display = "none";
-      document.getElementById("mainContent").style.display = "block";
-      document.getElementById("bgMusic").play();
-    });
-
-  } else {
-    alert("Wrong password 😢");
-  }
+  alert("clicked");
 }
 
 // Hearts
