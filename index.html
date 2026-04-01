@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>To Suhani ❤️</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
 body {
@@ -89,10 +89,29 @@ button {
 }
 
 .text {
-  font-family: 'Playfair Display', serif;
-  margin: 30px 0;
-  line-height: 1.7;
-  font-size: 1.2em;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.6em;
+  line-height: 1.9;
+  margin: 40px 0;
+  color: #ffd1dc;
+
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.typing {
+  border-right: 2px solid #ffd1dc;
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  animation: blinkCursor 1s infinite;
+}
+
+@keyframes blinkCursor {
+  0% { border-color: transparent; }
+  50% { border-color: #ffd1dc; }
+  100% { border-color: transparent; }
 }
 
 img {
@@ -141,34 +160,34 @@ img {
   <div class="container">
     <h1>Happy 2nd Anniversary, <span class="glow">Suhani</span> ❤️</h1>
 
-    <div class="text">Suhani... you changed my life in ways I never imagined. You taught me to love.. </div>
+    <div class="text" data-text="Suhani... you changed my life in ways I never imagined. You taught me to love.."></div>
     <img src="photo1.jpg">
 
-    <div class="text">Every hug, every  moment with you feels soft, warm, and real.</div>
+    <div class="text" data-text="Every hug, every  moment with you feels soft, warm, and real."></div>
     <img src="photo2.jpg">
 
-    <div class="text">Your arms are my favorite place to just sink in...</div>
+    <div class="text" data-text="Your arms are my favorite place to just sink in..."></div>
     <img src="photo3.jpg">
 
-    <div class="text">I don't know how fast these 2 years went.. now it feels like I have known you since forever. With you, everything feels right.</div>
+    <div class="text" data-text="I don't know how fast these 2 years went.. now it feels like I have known you since forever. With you, everything feels right."></div>
     <img src="photo4.jpg">
 
-    <div class="text">I promise to love you in every phase, every mood, every day.</div>
+    <div class="text" data-text="I promise to love you in every phase, every mood, every day."></div>
     <img src="photo5.jpg">
 
-    <div class="text">You are my peace, my chaos, my everything.</div>
+    <div class="text" data-text="You are my peace, my chaos, my everything."></div>
     <img src="photo6.jpg">
 
-    <div class="text">You have made it such that I can't imagine my day ending without talking to you.. or seeing you smile.. or enjoying your little dance breaks..</div>
+    <div class="text" data-text="You have made it such that I can't imagine my day ending without talking to you.. or seeing you smile.. or enjoying your little dance breaks.."></div>
     <img src="photo7.jpg">
 
-    <div class="text">You make our journey towards becoming CA's lighter..</div>
+    <div class="text" data-text="You make our journey towards becoming CA's lighter.."></div>
     <img src="photo8.jpg">
 
-    <div class="text">To many more years laughing, loving, dreaming, gossiping, cuddling, and a little bit of drama, with you..</div>
+    <div class="text" data-text="To many more years laughing, loving, dreaming, gossiping, cuddling, and a little bit of drama, with you.."></div>
     <img src="photo9.jpg">
 
-    <div class="text">I will always be there for you. With love, yours and yours only..Ranjeet</div>
+    <div class="text" data-text="I will always be there for you. With love, yours and yours only..Ranjeet"></div>
     <img src="photo10.jpg">
 
 
@@ -208,6 +227,45 @@ window.addEventListener("scroll", () => {
     document.getElementById("popup").style.display = "block";
   }
 });
+const texts = document.querySelectorAll('.text');
+
+function typeWriter(element, speed = 35) {
+  const text = element.dataset.text;
+  element.innerHTML = "";
+  element.classList.add("typing");
+
+  let i = 0;
+
+  function typing() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, speed);
+    } else {
+      element.classList.remove("typing");
+    }
+  }
+
+  typing();
+}
+
+function revealOnScroll() {
+  const triggerBottom = window.innerHeight * 0.85;
+
+  texts.forEach(text => {
+    const top = text.getBoundingClientRect().top;
+
+    if (top < triggerBottom && !text.classList.contains("visible")) {
+      text.classList.add("visible");
+      text.style.opacity = "1";
+      text.style.transform = "translateY(0)";
+      typeWriter(text);
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+window.addEventListener("load", revealOnScroll);
 </script>
 
 </body>
